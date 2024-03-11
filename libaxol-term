@@ -1,0 +1,60 @@
+#!/bin/bash
+# 
+# libexample: a terminal library for shell scripting.
+# use it with source.
+#
+# libexample needs this programs to work: tput stty and bc.
+#
+
+function libaxolterm_init() {
+	tput civis
+	stty -echo
+	clear
+}
+
+function libaxolterm_getsize() {
+	read -r LIBAXOLTERM_TERM_Y LIBAXOLTERM_TERM_X < <(stty size)
+}
+
+function libaxolterm_getsize_calc() {
+	read -r LIBAXOLTERM_TERM_CALC_Y LIBAXOLTERM_TERM_CALC_X < <(stty size)
+}
+
+function libaxolterm_getsize_refresh() {
+	read -r LIBAXOLTERM_TERM_REFRESH_Y LIBAXOLTERM_TERM_REFRESH_X < <(stty size)
+}
+
+function libaxolterm_calc() {
+	libaxolterm_getsize_calc
+
+	LIBAXOLTERM_CORD_Y=$(echo "scale=2; ${1} * ${LIBAXOLTERM_TERM_CALC_Y}" | bc -l )
+	LIBAXOLTERM_CORD_X=$(echo "scale=2; ${2} * ${LIBAXOLTERM_TERM_CALC_X}" | bc -l )
+}
+
+function libaxolterm_goto() {
+	tput cup ${1%.*} ${2%.*}
+}
+
+function libaxolterm_refresh() {
+
+	if [ "$LIBAXOLTERM_TERM_REFRESH_X" != "$LIBAXOLTERM_TERM_X" ] || [ "$LIBAXOLTERM_TERM_REFRESH_Y" != "$LIBAXOLTERM_TERM_Y" ]; then
+		clear
+	fi
+	
+}
+
+function libaxolterm_writetext() {
+	libaxolterm_calc $1 $2
+	LIBAXOLTERM_WRITETEXT_NUM=${#3}
+	LIBAXOLTERM_WRITETEXT_CENTER=$((LIBAXOLTERM_WRITETEXT_NUM / 2 ))
+	LIBAXOLTERM_WRITETEXT_FIX=$((LIBAXOLTERM_CORD_X - LIBAXOLTERM_WRITETEXT_CENTER))
+	libaxolterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_WRITETEXT_FIX #$((LIBAXOLTERM_CORD_X - LIBAXOLTERM_WRITETEXT_CENTER))
+	echo "$3"
+
+}
+
+function libaxolterm_exit() {
+	tput cnorm
+	stty echo
+	clear
+}
