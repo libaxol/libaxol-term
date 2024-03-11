@@ -54,7 +54,7 @@ function libaxolterm_writetext() {
 
 function libaxolterm_writetext_notcentered() {
 	libaxolterm_calc $1 $2
-	libaxlterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_CORD_X
+	libaxolterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_CORD_X
 	echo "$3"
 }
 
