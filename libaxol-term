@@ -43,15 +43,19 @@ function libaxolterm_refresh() {
 	
 }
 
-# NOT WORKING!!!
 function libaxolterm_writetext() {
 	libaxolterm_calc $1 $2
 	LIBAXOLTERM_WRITETEXT_NUM=${#3}
-	LIBAXOLTERM_WRITETEXT_CENTER=$((LIBAXOLTERM_WRITETEXT_NUM / 2 ))
-	LIBAXOLTERM_WRITETEXT_FIX=$((LIBAXOLTERM_CORD_X - LIBAXOLTERM_WRITETEXT_CENTER))
-	libaxolterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_WRITETEXT_FIX #$((LIBAXOLTERM_CORD_X - LIBAXOLTERM_WRITETEXT_CENTER))
+	read -r LIBAXOLTERM_WRITETEXT_CENTER < <(echo $((LIBAXOLTERM_WRITETEXT_NUM / 2 )) )
+	read -r LIBAXOLTERM_WRITETEXT_FIX < <(echo $(( ${LIBAXOLTERM_CORD_X%.*} - LIBAXOLTERM_WRITETEXT_CENTER)) )
+	libaxolterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_WRITETEXT_FIX 
 	echo "$3"
+}
 
+function libaxolterm_writetext_notcentered() {
+	libaxolterm_calc $1 $2
+	libaxlterm_goto $LIBAXOLTERM_CORD_Y $LIBAXOLTERM_CORD_X
+	echo "$3"
 }
 
 function libaxolterm_exit() {
