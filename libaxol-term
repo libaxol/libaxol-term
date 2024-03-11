@@ -1,9 +1,9 @@
 #!/bin/bash
 # 
-# libexample: a terminal library for shell scripting.
+# libaxol-term: a terminal library for shell scripting.
 # use it with source.
 #
-# libexample needs this programs to work: tput stty and bc.
+# libaxol-term needs this programs to work: tput stty and bc.
 #
 
 function libaxolterm_init() {
@@ -43,6 +43,7 @@ function libaxolterm_refresh() {
 	
 }
 
+# NOT WORKING!!!
 function libaxolterm_writetext() {
 	libaxolterm_calc $1 $2
 	LIBAXOLTERM_WRITETEXT_NUM=${#3}
