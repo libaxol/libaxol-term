@@ -1,6 +1,6 @@
 #!/bin/bash
 # 
-# libaxol-term: a terminal library for shell scripting.
+# libaxol-term: a library written in shell to create interfaces.
 # use it with source.
 #
 # libaxol-term needs this programs to work: tput stty and bc.
