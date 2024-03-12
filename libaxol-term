@@ -26,7 +26,6 @@ function libaxolterm_getsize_refresh() {
 
 function libaxolterm_calc() {
 	libaxolterm_getsize_calc
-
 	LIBAXOLTERM_CORD_Y=$(echo "scale=2; ${1} * ${LIBAXOLTERM_TERM_CALC_Y}" | bc -l )
 	LIBAXOLTERM_CORD_X=$(echo "scale=2; ${2} * ${LIBAXOLTERM_TERM_CALC_X}" | bc -l )
 }
@@ -36,11 +35,9 @@ function libaxolterm_goto() {
 }
 
 function libaxolterm_refresh() {
-
 	if [ "$LIBAXOLTERM_TERM_REFRESH_X" != "$LIBAXOLTERM_TERM_X" ] || [ "$LIBAXOLTERM_TERM_REFRESH_Y" != "$LIBAXOLTERM_TERM_Y" ]; then
 		clear
 	fi
-	
 }
 
 function libaxolterm_writetext() {
