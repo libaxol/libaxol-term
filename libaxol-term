@@ -1,11 +1,14 @@
 #!/bin/bash
 # 
 # libaxol-term: a library written in shell to create interfaces.
-# use it with source.
+# Use it with source.
 #
-# libaxol-term needs this programs to work: tput stty and bc.
+# libaxol-term needs this programs to work: bash, tput, stty, and bc.
+# You can obtain needed programs with the follow packages: gnu coreutils, termutils, bash and bc.
+# !! NOT TESTED !! Or you can obtain it with busybox multibinary (you need to install bash and tput to work with this library).
 #
 
+# MAIN FUNCTIONS
 function libaxolterm_init() {
 	tput civis
 	stty -echo
